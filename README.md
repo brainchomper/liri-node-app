@@ -31,6 +31,10 @@ You Must provide your own .env file for this repo to work properly.
 
 `npm install fs`
 
+### DotEnv
+
+`npm install dotenv`
+
 ## Get Started
 
 Here's a quick rundom of the commands you can use in LIRI.
