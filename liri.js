@@ -17,11 +17,6 @@ var command = process.argv[2];
 // captures secondary command
 var secondCommand = process.argv[3];
 
-// gets user input as per spacing
-var usrCmd = "";
-for (var i = 3; i < process.argv[i]; i++) {
-	usrCmd += process.argv[i] + "+";
-}
 // omdb Mr. Nobody default text
 var mrNobody = "\n If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947\n\nIt's on Netflix!";
 
@@ -30,7 +25,7 @@ function callTwitter() {
 	twitter.get('search/tweets', { q: 'kdsbot' }, function (error, tweets, response) {
 		if (!error) {
 			console.log("\n---------------------------")
-			console.log("\n Searching tweets for @nutzhut\n")
+			console.log("\n Searching tweets for @kdsbot\n")
 			for (var i = 0; i < 20; i++) {
 				console.log("\n---------------------------")
 				console.log("\nTweet #" + (i + 1))
@@ -49,8 +44,22 @@ function callTwitter() {
 };
 
 // spotify api call
-function callSpotify() {
+function callSpotify(object) {
+	spotify.search({ type: 'track', query: object }, function (err, data) {
+		if (err) {
+			return console.log("There was an error of " + err)
+		}
+		// easy storage of our song
+		var song = data.tracks.items[0];
 
+		var printsong = {
+			'Artist(s)': song.artists[0].name,
+			'Name': song.name,
+			'Preview Link': song.preview_url,
+			'Album': song.album.name
+		}
+		console.log(JSON.stringify(printsong, null, 2));
+	})
 }
 
 // OMDB Call
@@ -87,7 +96,7 @@ switch (command) {
 		break;
 	case "movie-this":
 		if (secondCommand) {
-			return callOmdb(usrCmd)
+			return callOmdb(secondCommand)
 		}
 		// or it looks for my. nobody
 		console.log(mrNobody)
@@ -97,7 +106,7 @@ switch (command) {
 		// if input then
 		if (secondCommand) {
 			console.log("\nYou've started the spotify search.");
-			return callSpotify(usrCmd)
+			return callSpotify(secondCommand)
 
 		}
 		default : "I Dont Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
