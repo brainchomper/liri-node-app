@@ -17,19 +17,88 @@ var command = process.argv[2];
 // captures secondary command
 var secondCommand = process.argv[3];
 
+// gets user input as per spacing
+var usrCmd = "";
+for (var i = 3; i < process.argv[i]; i++) {
+	usrCmd += process.argv[i] + "+";
+}
+// omdb Mr. Nobody default text
+var mrNobody = "\n If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947\n\nIt's on Netflix!";
+
+// twitter api call
 function callTwitter() {
-	twitter.get('search/tweets' , { q: '_kvnsmith'}, function(error, tweets, response){
-		if (!error){
+	twitter.get('search/tweets', { q: 'kdsbot' }, function (error, tweets, response) {
+		if (!error) {
 			console.log("\n---------------------------")
-			console.log("\n Searching tweets for @_kvnsmith\n")
-			for (var i = 0; i < 19; i++){
-				console.log("\n--------------------------")
-				console.log("\nTweet #" + (i+1))
+			console.log("\n Searching tweets for @nutzhut\n")
+			for (var i = 0; i < 20; i++) {
+				console.log("\n---------------------------")
+				console.log("\nTweet #" + (i + 1))
 				console.log("\n" + tweets.statuses[i].text)
 				console.log("\nTweeted at: " + tweets.statuses[i].created_at)
 			}
 			return console.log("Completed Twitter Pull")
 		}
-		console.log("Something Happened, Please Try Again")
+		// error checking and logging
+		console.log("\n---------------------------")
+		console.log(error)
+		console.log("\n---------------------------")
+		console.log("!!!Something Happened, Please Try Again!!!")
+
 	})
+};
+
+// spotify api call
+function callSpotify() {
+
+}
+
+// OMDB Call
+function callOmdb(object) {
+	request("http://www.omdbapi.com/?apikey=f9b68db0&t=" + object, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			var body = JSON.parse(body);
+			var movieInfo = {
+				"Title": body.Title,
+				"Release Year": body.Year,
+				"IMDB Rating": parseInt(body.imdbRating),
+				"Rotten Tomatoes Rating": body.Ratings[1].Value,
+				"Country of Production": body.Country,
+				"Language(s)": body.Language,
+				"Plot": body.Plot,
+				"Actors ": body.Actors
+			}
+			// print the JSON object out
+			return console.log(JSON.stringify(movieInfo, null, 2));
+		}
+		// error handling
+		console.log(error);
+	})
+}
+
+// do what i say
+function doThis() {
+
+}
+
+switch (command) {
+	case "my-tweets":
+		return callTwitter();
+		break;
+	case "movie-this":
+		if (secondCommand) {
+			return callOmdb(usrCmd)
+		}
+		// or it looks for my. nobody
+		console.log(mrNobody)
+		callOmdb("mr nobody");
+		break;
+	case "spotify-this-song":
+		// if input then
+		if (secondCommand) {
+			console.log("\nYou've started the spotify search.");
+			return callSpotify(usrCmd)
+
+		}
+		default : "I Dont Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
 }
