@@ -54,9 +54,9 @@ or<br>
 
 Retrieves movie information for a movie:
 
+`node liri.js movie-this Star Wars`<br>
+or<br>
 `node liri.js movie-this "Star Wars"`
-or 
-`node liri.js movie-this Star Wars`
 
 ### Get Random Info
 
