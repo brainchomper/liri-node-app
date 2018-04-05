@@ -46,12 +46,16 @@ Retrieves up to your latest 20 tweets:
 Retrieves song information for a track:
 
 `node liri.js spotify-this-song "American Girl"`
+or
+`node liri.js spotify-this-song American Girl`
 
 ### Get Movie Info
 
 Retrieves movie information for a movie:
 
 `node liri.js movie-this "Star Wars"`
+or 
+`node liri.js movie-this Star Wars`
 
 ### Get Random Info
 
