@@ -46,9 +46,9 @@ function callTwitter() {
 
 // spotify api call
 function callSpotify(object) {
-	spotify.search({ type: 'track', query: object }, function (err, data) {
-		if (err) {
-			return console.log("There was an error of " + err)
+	spotify.search({ type: 'track', query: object }, function (error, data) {
+		if (error) {
+			return console.log("There was an error of " + error)
 		}
 		// easy storage of our song
 		var song = data.tracks.items[0];
@@ -88,7 +88,25 @@ function callOmdb(object) {
 
 // do what i say
 function doThis() {
-
+	fs.readFile("random.txt", "utf8", function (error, data) {
+		if (error) {
+			return console.log("There was an error with do-what-it-says...\n" + error)
+		}
+		var doArr = data.split(',');
+		switch (doArr[0]) {
+			case "spotify-this-song":
+				callSpotify(doArr[1]);
+				break;
+			case "my-tweets":
+				callTwitter();
+				break;
+			case "movie-this":
+				callOmdb(doArr[1]);
+				break;
+			default:
+				console.log("I couldn't read anything in the file");
+		}
+	})
 }
 
 switch (command) {
@@ -112,7 +130,12 @@ switch (command) {
 		console.log("\n------------------------------------------")
 		console.log("\nNo song was provided, so here is 'The Sign' by Ace of Bass")
 		console.log("\n------------------------------------------")
-		callSpotify("0hrBpAOgrt8RXigk83LLNE");
+		callSpotify("The Sign Ace of Base");
 		break;
-		default : "I Dont Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
+	case "do-what-it-says":
+	("\n------------------------------------------")
+	console.log("\n..Reading The Random.txt File...")
+		doThis();
+		break;
+	default: "I Dont Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
 }
