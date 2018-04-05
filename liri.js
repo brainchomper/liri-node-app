@@ -22,22 +22,23 @@ var mrNobody = "\n If you haven't watched 'Mr. Nobody,' then you should: http://
 
 // twitter api call
 function callTwitter() {
-	twitter.get('search/tweets', { q: 'kdsbot' }, function (error, tweets, response) {
+	twitter.get('search/tweets', { q: 'kdsbot', count: 20 }, function (error, tweets, response) {
 		if (!error) {
-			console.log("\n---------------------------")
+			console.log("\n------------------------------------------")
 			console.log("\n Searching tweets for @kdsbot\n")
 			for (var i = 0; i < 20; i++) {
-				console.log("\n---------------------------")
+				console.log("\n------------------------------------------")
 				console.log("\nTweet #" + (i + 1))
 				console.log("\n" + tweets.statuses[i].text)
 				console.log("\nTweeted at: " + tweets.statuses[i].created_at)
 			}
+			console.log("\n------------------------------------------")
 			return console.log("Completed Twitter Pull")
 		}
 		// error checking and logging
-		console.log("\n---------------------------")
+		console.log("\n------------------------------------------")
 		console.log(error)
-		console.log("\n---------------------------")
+		console.log("\n------------------------------------------")
 		console.log("!!!Something Happened, Please Try Again!!!")
 
 	})
@@ -105,9 +106,13 @@ switch (command) {
 	case "spotify-this-song":
 		// if input then
 		if (secondCommand) {
-			console.log("\nYou've started the spotify search.");
+			console.log("\nYou've started the spotify search...");
 			return callSpotify(secondCommand)
-
 		}
+		console.log("\n------------------------------------------")
+		console.log("\nNo song was provided, so here is 'The Sign' by Ace of Bass")
+		console.log("\n------------------------------------------")
+		callSpotify("0hrBpAOgrt8RXigk83LLNE");
+		break;
 		default : "I Dont Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
 }
