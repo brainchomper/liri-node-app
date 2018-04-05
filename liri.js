@@ -17,6 +17,13 @@ var command = process.argv[2];
 // captures secondary command
 var secondCommand = process.argv[3];
 
+// capture all input for proccessing later
+var thrdCmd = "";
+// remove spaces if user didnt formate query right
+for (var i = 3; i < process.argv.length; i++) {
+	thrdCmd += process.argv[i] + "+";
+}
+
 // omdb Mr. Nobody default text
 var mrNobody = "\n If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947\n\nIt's on Netflix!";
 
@@ -115,7 +122,7 @@ switch (command) {
 		break;
 	case "movie-this":
 		if (secondCommand) {
-			return callOmdb(secondCommand)
+			return callOmdb(thrdCmd)
 		}
 		// or it looks for my. nobody
 		console.log(mrNobody)
@@ -125,7 +132,7 @@ switch (command) {
 		// if input then
 		if (secondCommand) {
 			console.log("\nYou've started the spotify search...");
-			return callSpotify(secondCommand)
+			return callSpotify(thrdCmd)
 		}
 		console.log("\n------------------------------------------")
 		console.log("\nNo song was provided, so here is 'The Sign' by Ace of Bass")
@@ -137,5 +144,5 @@ switch (command) {
 	console.log("\n..Reading The Random.txt File...")
 		doThis();
 		break;
-	default: "I Dont Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
+	default: "I Don't Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
 }
