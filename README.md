@@ -9,6 +9,12 @@ or a movie, or just choose a random action from your own random file.
 The [package.json](https://github.com/brainchomper/liri-node-app/blob/master/package.json)
 lists dependent node packages, but for your convenvice, these are the ones to install.
 
+To Install all Dependencies after clone or download of this repository simply:
+
+`npm install`
+
+You Must provide your own .env file for this repo to work properly. 
+
 ### Twitter
 
 `npm install twitter`
