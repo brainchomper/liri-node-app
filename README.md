@@ -6,7 +6,7 @@ or a movie, or just choose a random action from your own random file.
 
 ## Installs
 
-The [package.json](https://github.com/Meggin/liri-node-app/blob/master/package.json)
+The [package.json](https://github.com/brainchomper/liri-node-app/blob/master/package.json)
 lists dependent node packages, but for your convenvice, these are the ones to install.
 
 ### Twitter
