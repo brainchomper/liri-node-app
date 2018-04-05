@@ -27,10 +27,6 @@ You Must provide your own .env file for this repo to work properly.
 
 `npm install request`
 
-### FS
-
-`npm install fs`
-
 ### DotEnv
 
 `npm install dotenv`
