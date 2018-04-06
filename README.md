@@ -41,6 +41,9 @@ Retrieves up to your latest 20 tweets:
 
 `node liri.js my-tweets`
 
+Screenshot of result:
+![tweets](./images/tweets.jpg?raw=true)
+
 ### Get Song Info
 
 Retrieves song information for a track:
@@ -48,7 +51,7 @@ Retrieves song information for a track:
 `node liri.js spotify-this-song American Girl`<br>
 or<br>
 `node liri.js spotify-this-song "American Girl"`
-
+![tweets](./images/spotify.jpg?raw=true)
 
 ### Get Movie Info
 
@@ -57,9 +60,10 @@ Retrieves movie information for a movie:
 `node liri.js movie-this Star Wars`<br>
 or<br>
 `node liri.js movie-this "Star Wars"`
-
+![tweets](./images/movie.jpg?raw=true)
 ### Get Random Info
 
 Gets random text inside a file and does what it says:
 
 `node liri.js do-what-it-says`
+![tweets](./images/do-this.jpg?raw=true)
