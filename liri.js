@@ -144,5 +144,5 @@ switch (command) {
 	console.log("\n..Reading The Random.txt File...")
 		doThis();
 		break;
-	default: "I Don't Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song"
+	default: console.log("I Don't Understand!\n:-/\nSupported options are: \nmy-tweets\nmovie-this\nspotify-this-song")
 }
